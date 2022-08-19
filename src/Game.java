@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
@@ -12,6 +14,9 @@ public class Game extends Canvas implements Runnable{
     private Thread thread;
     private JFrame frame;
     private boolean running = false;
+
+    private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); //main image object, helps handle all the pixel data.
+    private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData(); //getting the images Rasters(array of pixels) Data Buffer, and casting it to int.
 
     public Game(){
         Dimension size = new Dimension(width*scale, height*scale);

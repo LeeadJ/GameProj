@@ -11,3 +11,7 @@
 
 4) Graphic Initialization:
 -Recolored the frame to black by buffer rendering.
+
+5) Raster:
+-creating an image and a pixel array to access and modify each pixel.
+
