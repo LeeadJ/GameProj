@@ -1,3 +1,5 @@
+import graphics.Screen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,12 +17,17 @@ public class Game extends Canvas implements Runnable{
     private JFrame frame;
     private boolean running = false;
 
+    private Screen screen;
+
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); //main image object, helps handle all the pixel data.
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData(); //getting the images Rasters(array of pixels) Data Buffer, and casting it to int.
 
+    //Constructor:
     public Game(){
         Dimension size = new Dimension(width*scale, height*scale);
         setPreferredSize(size); //Canvas method
+
+        screen = new Screen(width, height);
 
         frame = new JFrame(); //creating a new instance of JFrame when creating a new Game.
     }
