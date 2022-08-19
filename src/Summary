@@ -8,3 +8,6 @@
 3) Buffer Strategy:
 -update/render functions.
 -understanding the buffers job when displaying frames.
+
+4) Graphic Initialization:
+-Recolored the frame to black by buffer rendering.

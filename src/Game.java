@@ -34,7 +34,10 @@ public class Game extends Canvas implements Runnable{
             e.printStackTrace(); //exit out of the program.
         }
     }
-    //run method will contain the game loop method, making sure we won't exit out of the game:
+    /*
+    -Run method will contain the game loop method, making sure we won't exit out of the game.
+    -Game implements Runnable so the run function will be called automatically when thread is initialized.
+    */
     public void run(){
         while(running){ //while running is true, game will work.
             update();
@@ -50,7 +53,7 @@ public class Game extends Canvas implements Runnable{
 
     }
     /*
-    This function is going to display the images to the screen, as many times as the computer can per second.
+    -This function is going to display the images to the screen, as many times as the computer can per second.
     */
     public void render(){
         BufferStrategy bs = getBufferStrategy(); //retrieving the buffer-strategy of our Canvas obj 'Game'.
@@ -59,12 +62,17 @@ public class Game extends Canvas implements Runnable{
             createBufferStrategy(3); //3 buffers improves speed of frames displayed.
             return;
         }
+        Graphics g = bs.getDrawGraphics(); //linking our drawn graphics to the buffer.
+        g.setColor(Color.BLACK); //setting the graphical color to black.
+        g.fillRect(0,0, getWidth(), getHeight()); //filling the screen with a rectangle. (0,0) - starting coordinates
+        g.dispose(); //removing the graphics from the buffer after being used.
+        bs.show(); //shows the next buffer that is being calculated.
     }
 
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false); //making sure our window won't be resized. (causes graphical errors)
-        game.frame.setTitle("Rain");
+        game.frame.setTitle("The Game");
         game.frame.add(game); //adding a game component to our window.
         game.frame.pack(); //sets the size of the frame to the size of the component.
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //closes the game program when 'x' is clicked in the top-right corner.
