@@ -51,10 +51,20 @@ public class Game extends Canvas implements Runnable{
     -Game implements Runnable so the run function will be called automatically when thread is initialized.
     */
     public void run(){
-        while(running){ //while running is true, game will work.
-            update();
+        long lastTime = System.nanoTime(); //time var to measure system time (used to keep track of render)
+        final double nanoSec = 1000000000.0 / 60.0;
+        double delta = 0;
+        while(running){ //while running=true, game will work.
+            long now = System.nanoTime();
+            delta += (now - lastTime) / nanoSec;
+            lastTime = now;
+            while(delta >= 1){
+                update();
+                delta--;
+            }
             render();
         }
+        stop();
     }
 
     /*
@@ -74,8 +84,9 @@ public class Game extends Canvas implements Runnable{
             createBufferStrategy(3); //3 buffers improves speed of frames displayed.
             return;
         }
-
+        screen.clear();
         screen.render();
+
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
         }
