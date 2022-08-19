@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
@@ -36,7 +37,27 @@ public class Game extends Canvas implements Runnable{
     //run method will contain the game loop method, making sure we won't exit out of the game:
     public void run(){
         while(running){ //while running is true, game will work.
-            System.out.println("Running....");
+            update();
+            render();
+        }
+    }
+
+    /*
+    -This function handles all the logic of the game and updates it in real time.
+    -Restrict to 60 times per second.
+    */
+    public void  update(){
+
+    }
+    /*
+    This function is going to display the images to the screen, as many times as the computer can per second.
+    */
+    public void render(){
+        BufferStrategy bs = getBufferStrategy(); //retrieving the buffer-strategy of our Canvas obj 'Game'.
+        //if the buffer-strategy hasn't been created yet:
+        if(bs == null){
+            createBufferStrategy(3); //3 buffers improves speed of frames displayed.
+            return;
         }
     }
 

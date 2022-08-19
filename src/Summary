@@ -1,0 +1,10 @@
+1) Resolution:
+-how to scale the game to the screen.
+-JFrame, Canvas libraries.
+
+2) Threads:
+-Implementing runnable, synchronized, start/stop functions.
+
+3) Buffer Strategy:
+-update/render functions.
+-understanding the buffers job when displaying frames.
