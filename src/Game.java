@@ -1,5 +1,5 @@
 import graphics.Screen;
-
+import input.Keyboard;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -16,6 +16,8 @@ public class Game extends Canvas implements Runnable{
 
     private Thread thread;
     private JFrame frame;
+    private Keyboard key;
+
     private boolean running = false;
 
     private Screen screen;
@@ -28,9 +30,10 @@ public class Game extends Canvas implements Runnable{
         Dimension size = new Dimension(width*scale, height*scale);
         setPreferredSize(size); //Canvas method
 
-        screen = new Screen(width, height);
-
+        screen = new Screen(width, height); //initializing the screen object;
         frame = new JFrame(); //creating a new instance of JFrame when creating a new Game.
+        key = new Keyboard(); //initializing the keyboard object;
+        addKeyListener(key);
     }
     //synchronized = prevents thread interferences and memory consistency errors
     public synchronized void start(){
@@ -86,6 +89,7 @@ public class Game extends Canvas implements Runnable{
     */
     int x=0; int y=0;
     public void  update(){
+        key.update();
         x++;
         y++;
     }
