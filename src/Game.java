@@ -90,8 +90,11 @@ public class Game extends Canvas implements Runnable{
     int x=0; int y=0;
     public void  update(){
         key.update();
-        x++;
-        y++;
+        //moving the map according to the keys being pressed.
+        if(key.up) y--;
+        if(key.down) y++;
+        if(key.right) x++;
+        if(key.left) x--;
     }
     /*
     -This function is going to display the images to the screen, as many times as the computer can per second.
