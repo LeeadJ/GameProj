@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable{
     -Game implements Runnable so the run function will be called automatically when thread is initialized.
     */
     public void run(){
-        long lastTime = System.nanoTime(); //time var to measure system time (used to keep track of render)
+        long lastTime = System.nanoTime(); //time variable to measure system time (used to keep track of render)
         long timer = System.currentTimeMillis();
         final double nanoSec = 1000000000.0 / 60.0;
         double delta = 0; //measures the delta between start of run and before the while loop.
@@ -84,12 +84,15 @@ public class Game extends Canvas implements Runnable{
     -This function handles all the logic of the game and updates it in real time.
     -Restrict to 60 times per second.
     */
+    int x=0; int y=0;
     public void  update(){
-
+        x++;
+        y++;
     }
     /*
     -This function is going to display the images to the screen, as many times as the computer can per second.
     */
+
     public void render(){
         BufferStrategy bs = getBufferStrategy(); //retrieving the buffer-strategy of our Canvas obj 'Game'.
         //if the buffer-strategy hasn't been created yet:
@@ -98,7 +101,7 @@ public class Game extends Canvas implements Runnable{
             return;
         }
         screen.clear();
-        screen.render();
+        screen.render(x,y);
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
