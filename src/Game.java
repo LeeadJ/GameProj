@@ -12,6 +12,7 @@ public class Game extends Canvas implements Runnable{
     public static int width = 300;
     public static int height = width / 16 * 9;
     public static int scale = 3; //scaling the game to x3 the game size, but with performance of 300 pixels wide.
+    public static String title = "THE GAME";
 
     private Thread thread;
     private JFrame frame;
@@ -52,17 +53,29 @@ public class Game extends Canvas implements Runnable{
     */
     public void run(){
         long lastTime = System.nanoTime(); //time var to measure system time (used to keep track of render)
+        long timer = System.currentTimeMillis();
         final double nanoSec = 1000000000.0 / 60.0;
-        double delta = 0;
+        double delta = 0; //measures the delta between start of run and before the while loop.
+        int frames = 0; //going to count how many frames we have time to render every second.
+        int updates = 0; //measures how many times the update method is called every second.
         while(running){ //while running=true, game will work.
             long now = System.nanoTime();
             delta += (now - lastTime) / nanoSec;
             lastTime = now;
             while(delta >= 1){
                 update();
+                updates++;
                 delta--;
             }
             render();
+            frames++; //counts while loops.
+
+            if(System.currentTimeMillis() - timer > 1000){ //If the difference is greater than 1 second.
+                timer += 1000;
+                frame.setTitle(title + "   |   " + updates + " ups, " + frames + " fps");
+                updates = 0;
+                frames = 0;
+            }
         }
         stop();
     }
@@ -102,7 +115,7 @@ public class Game extends Canvas implements Runnable{
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false); //making sure our window won't be resized. (causes graphical errors)
-        game.frame.setTitle("The Game");
+        game.frame.setTitle(Game.title);
         game.frame.add(game); //adding a game component to our window.
         game.frame.pack(); //sets the size of the frame to the size of the component.
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //closes the game program when 'x' is clicked in the top-right corner.
