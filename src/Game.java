@@ -94,7 +94,7 @@ public class Game extends Canvas implements Runnable{
         if(key.up) y--;
         if(key.down) y++;
         if(key.right) x++;
-        if(key.left) x--;
+        if(key.left) x-- ;
     }
     /*
     -This function is going to display the images to the screen, as many times as the computer can per second.
